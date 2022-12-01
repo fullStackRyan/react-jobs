@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 require('colors')
 require('dotenv').config()
+const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 const PORT = process.env.PORT || 5000
 
@@ -31,5 +32,7 @@ if (process.env.NODE_ENV === 'production') {
     res.status(200).json({ message: 'Welcome to the React Jobs API' })
   })
 }
+
+app.use(errorHandler)
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
